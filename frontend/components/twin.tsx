@@ -96,7 +96,7 @@ export default function Twin() {
     };
 
     return (
-        <Card className="flex flex-col h-[600px] border-border bg-card shadow-xl">
+        <Card className="flex flex-col h-[calc(100vh-12rem)] min-h-[500px] max-h-[800px] border-border bg-card shadow-xl">
             {/* Header */}
             <CardHeader className="flex flex-row items-center gap-3 px-5 py-4 border-b border-border shrink-0">
                 <Avatar className="h-9 w-9">

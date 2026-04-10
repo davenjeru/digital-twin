@@ -1,6 +1,8 @@
 'use client';
 
 import CertificatesGrid from './CertificatesGrid';
+import SkillsGrid from './SkillsGrid';
+import ExperienceTimeline from './ExperienceTimeline';
 
 interface Props {
     type: string;
@@ -10,8 +12,10 @@ export default function RichComponent({ type }: Props) {
     switch (type) {
         case 'certificates':
             return <CertificatesGrid />;
-        // Future: case 'skills': return <SkillsGrid />;
-        // Future: case 'experience': return <ExperienceTimeline />;
+        case 'skills':
+            return <SkillsGrid />;
+        case 'experience':
+            return <ExperienceTimeline />;
         default:
             return null;
     }

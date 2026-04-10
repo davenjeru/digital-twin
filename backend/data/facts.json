@@ -50,7 +50,48 @@
       "image": "aws-cloud-practitioner.png"
     }
   ],
-  "courses": [],
+  "courses": [
+    {
+        "name": "Data Structures and Algorithms: Deep Dive Using Java",
+        "issuer": "Tim Buchakla",
+        "issued": "April 8, 2021",
+        "image": "udemy-course-data-structures-and-algorithms-using-java.jpg",
+        "type": "course",
+        "platform": "Udemy"
+    },
+    {
+        "name": "AWS Cloud Practitioner",
+        "issuer": "Stephane Maarek",
+        "issued": "January 13, 2020",
+        "image": "udemy-course-aws-cloud-practitioner.jpg",
+        "type": "course",
+        "platform": "Udemy"
+    },
+    {
+        "name": "AI Leader: Generative AI & Agentic AI for Leaders & Founders",
+        "issuer": "Ed Donner",
+        "issued": "March 12, 2026",
+        "image": "udemy-course-ai-leadership.jpg",
+        "type": "course",
+        "platform": "Udemy"
+    },
+        {
+        "name": "LLM Engineering: Master AI, Large Language Models & Agents",
+        "issuer": "Ed Donner",
+        "issued": "September 27, 2025",
+        "image": "udemy-course-llm-engineering.jpg",
+        "type": "course",
+        "platform": "Udemy"
+    },
+  {
+        "name": "AI Engineer Agentic Track: The Complete Agent & MCP Course",
+        "issuer": "Ed Donner",
+        "issued": "March 24, 2026",
+        "image": "udemy-course-agentic-ai.jpg",
+        "type": "course",
+        "platform": "Udemy"
+    }
+    ],
   "assessments": [
     {
       "code": "RT",

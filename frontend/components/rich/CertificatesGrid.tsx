@@ -1,8 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { Award, GraduationCap } from 'lucide-react';
+import { Award, GraduationCap, ZoomIn } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import { certificates, type CertificateEntry } from './data/certificates';
 
 export default function CertificatesGrid() {
@@ -23,12 +31,36 @@ function CertificateCard({ cert }: { cert: CertificateEntry }) {
             {/* Image area */}
             <div className="relative bg-muted aspect-video flex items-center justify-center overflow-hidden">
                 {!imgError ? (
-                    <img
-                        src={`/certificates/${cert.image}`}
-                        alt={`${cert.name} certificate`}
-                        className="w-full h-full object-cover"
-                        onError={() => setImgError(true)}
-                    />
+                    <Dialog>
+                        <DialogTrigger className="w-full h-full group relative block">
+                            <img
+                                src={`/certificates/${cert.image}`}
+                                alt={`${cert.name} certificate`}
+                                className="w-full h-full object-cover"
+                                onError={() => setImgError(true)}
+                            />
+                            {/* Zoom hint on hover */}
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md" />
+                            </div>
+                        </DialogTrigger>
+                        <DialogContent
+                            className="max-w-3xl w-full p-2 gap-0"
+                            showCloseButton
+                        >
+                            <DialogHeader className="p-3 pb-2">
+                                <DialogTitle className="text-sm">{cert.name}</DialogTitle>
+                                <DialogDescription className="text-xs">
+                                    {cert.issuer} · {cert.issued}
+                                </DialogDescription>
+                            </DialogHeader>
+                            <img
+                                src={`/certificates/${cert.image}`}
+                                alt={`${cert.name} certificate`}
+                                className="w-full rounded-lg object-contain max-h-[75vh]"
+                            />
+                        </DialogContent>
+                    </Dialog>
                 ) : (
                     <FallbackIcon cert={cert} />
                 )}
