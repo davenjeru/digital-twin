@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import RichComponent from '@/components/rich/RichComponent';
+import ChatMarkdown from '@/components/ChatMarkdown';
 
 interface Message {
     id: string;
@@ -173,7 +174,7 @@ export default function Twin() {
                                         ? 'bg-primary text-primary-foreground rounded-br-sm'
                                         : 'bg-muted text-foreground rounded-bl-sm'
                                 )}>
-                                    <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                                    <ChatMarkdown content={message.content} isUser={message.role === 'user'} />
                                     <p className={cn(
                                         'text-[10px] mt-1',
                                         message.role === 'user' ? 'text-primary-foreground/60' : 'text-muted-foreground'
