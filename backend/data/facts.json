@@ -34,19 +34,23 @@
     {
       "name": "Andela AI Academy: AI Mastery Program",
       "issuer": "Andela",
-      "issued": "Nov 2025"
+      "issued": "Nov 2025",
+      "image": "andela-ai-academy.png"
     },
     {
       "name": "GitHub Copilot",
       "issuer": "GitHub",
-      "issued": "Oct 2025"
+      "issued": "Oct 2025",
+      "image": "github-copilot.png"
     },
     {
       "name": "Certified Cloud Practitioner (Foundational)",
       "issuer": "Amazon Web Services (AWS)",
-      "issued": "Jan 2022"
+      "issued": "Jan 2022",
+      "image": "aws-cloud-practitioner.png"
     }
   ],
+  "courses": [],
   "assessments": [
     {
       "code": "RT",

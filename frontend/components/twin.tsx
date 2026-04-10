@@ -1,13 +1,22 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User } from 'lucide-react';
+import { Send, Bot } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+import RichComponent from '@/components/rich/RichComponent';
 
 interface Message {
     id: string;
     role: 'user' | 'assistant';
     content: string;
     timestamp: Date;
+    components?: string[];
 }
 
 export default function Twin() {
@@ -15,15 +24,18 @@ export default function Twin() {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [sessionId, setSessionId] = useState<string>('');
+    const [hasAvatar, setHasAvatar] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
+    useEffect(() => {
+        fetch('/avatar.png', { method: 'HEAD' })
+            .then(res => setHasAvatar(res.ok))
+            .catch(() => setHasAvatar(false));
+    }, []);
 
     useEffect(() => {
-        scrollToBottom();
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
     const sendMessage = async () => {
@@ -43,9 +55,7 @@ export default function Twin() {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/chat`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: userMessage.content,
                     session_id: sessionId || undefined,
@@ -56,182 +66,190 @@ export default function Twin() {
 
             const data = await response.json();
 
-            if (!sessionId) {
-                setSessionId(data.session_id);
-            }
+            if (!sessionId) setSessionId(data.session_id);
 
-            const assistantMessage: Message = {
+            setMessages(prev => [...prev, {
                 id: (Date.now() + 1).toString(),
                 role: 'assistant',
                 content: data.response,
                 timestamp: new Date(),
-            };
-
-            setMessages(prev => [...prev, assistantMessage]);
-        } catch (error) {
-            console.error('Error:', error);
-            const errorMessage: Message = {
+                components: data.components ?? [],
+            }]);
+        } catch {
+            setMessages(prev => [...prev, {
                 id: (Date.now() + 1).toString(),
                 role: 'assistant',
                 content: 'Sorry, I encountered an error. Please try again.',
                 timestamp: new Date(),
-            };
-            setMessages(prev => [...prev, errorMessage]);
+            }]);
         } finally {
             setIsLoading(false);
-            // Refocus the input after message is sent
-            setTimeout(() => {
-                inputRef.current?.focus();
-            }, 100);
+            setTimeout(() => inputRef.current?.focus(), 100);
         }
     };
 
-    const handleKeyPress = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
         }
     };
 
-    // Check if avatar exists
-    const [hasAvatar, setHasAvatar] = useState(false);
-    useEffect(() => {
-        // Check if avatar.png exists
-        fetch('/avatar.png', { method: 'HEAD' })
-            .then(res => setHasAvatar(res.ok))
-            .catch(() => setHasAvatar(false));
-    }, []);
-
     return (
-        <div className="flex flex-col h-full bg-gray-50 rounded-lg shadow-lg">
+        <Card className="flex flex-col h-[600px] border-border bg-card shadow-xl">
             {/* Header */}
-            <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white p-4 rounded-t-lg">
-                <h2 className="text-xl font-semibold flex items-center gap-2">
-                    <Bot className="w-6 h-6" />
-                    AI Digital Twin
-                </h2>
-                <p className="text-sm text-slate-300 mt-1">Your AI course companion</p>
-            </div>
+            <CardHeader className="flex flex-row items-center gap-3 px-5 py-4 border-b border-border shrink-0">
+                <Avatar className="h-9 w-9">
+                    {hasAvatar ? (
+                        <AvatarImage src="/avatar.png" alt="Dave Njeru" />
+                    ) : null}
+                    <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
+                        DN
+                    </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-foreground leading-tight">
+                        Dave Njeru&apos;s Digital Twin
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                        Chat with my AI companion about my career
+                    </span>
+                </div>
+                <Badge variant="secondary" className="ml-auto text-xs">
+                    Online
+                </Badge>
+            </CardHeader>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {messages.length === 0 && (
-                    <div className="text-center text-gray-500 mt-8">
-                        {hasAvatar ? (
-                            <img 
-                                src="/avatar.png" 
-                                alt="Digital Twin Avatar" 
-                                className="w-20 h-20 rounded-full mx-auto mb-3 border-2 border-gray-300"
-                            />
-                        ) : (
-                            <Bot className="w-12 h-12 mx-auto mb-3 text-gray-400" />
-                        )}
-                        <p>Hello! I&apos;m your Digital Twin.</p>
-                        <p className="text-sm mt-2">Ask me anything about AI deployment!</p>
-                    </div>
-                )}
-
-                {messages.map((message) => (
-                    <div
-                        key={message.id}
-                        className={`flex gap-3 ${
-                            message.role === 'user' ? 'justify-end' : 'justify-start'
-                        }`}
-                    >
-                        {message.role === 'assistant' && (
-                            <div className="flex-shrink-0">
+            <CardContent className="flex-1 min-h-0 p-0">
+                <ScrollArea className="h-full px-5 py-4">
+                    {messages.length === 0 && (
+                        <div className="flex flex-col items-center justify-center h-full min-h-[300px] gap-3 text-center">
+                            <div className="rounded-full bg-muted p-4">
                                 {hasAvatar ? (
-                                    <img 
-                                        src="/avatar.png" 
-                                        alt="Digital Twin Avatar" 
-                                        className="w-8 h-8 rounded-full border border-slate-300"
+                                    <img
+                                        src="/avatar.png"
+                                        alt="Dave Njeru"
+                                        className="h-12 w-12 rounded-full object-cover"
                                     />
                                 ) : (
-                                    <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
-                                        <Bot className="w-5 h-5 text-white" />
-                                    </div>
+                                    <Bot className="h-8 w-8 text-muted-foreground" />
                                 )}
                             </div>
-                        )}
-
-                        <div
-                            className={`max-w-[70%] rounded-lg p-3 ${
-                                message.role === 'user'
-                                    ? 'bg-slate-700 text-white'
-                                    : 'bg-white border border-gray-200 text-gray-800'
-                            }`}
-                        >
-                            <p className="whitespace-pre-wrap">{message.content}</p>
-                            <p
-                                className={`text-xs mt-1 ${
-                                    message.role === 'user' ? 'text-slate-300' : 'text-gray-500'
-                                }`}
-                            >
-                                {message.timestamp.toLocaleTimeString()}
-                            </p>
-                        </div>
-
-                        {message.role === 'user' && (
-                            <div className="flex-shrink-0">
-                                <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                                    <User className="w-5 h-5 text-white" />
-                                </div>
+                            <div className="space-y-1">
+                                <p className="text-sm font-medium text-foreground">
+                                    Hello! I&apos;m Dave&apos;s Digital Twin
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                    Ask me anything about my career
+                                </p>
                             </div>
-                        )}
-                    </div>
-                ))}
+                        </div>
+                    )}
 
-                {isLoading && (
-                    <div className="flex gap-3 justify-start">
-                        <div className="flex-shrink-0">
-                            {hasAvatar ? (
-                                <img 
-                                    src="/avatar.png" 
-                                    alt="Digital Twin Avatar" 
-                                    className="w-8 h-8 rounded-full border border-slate-300"
-                                />
-                            ) : (
-                                <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
-                                    <Bot className="w-5 h-5 text-white" />
+                    <div className="space-y-4">
+                        {messages.map((message) => (
+                            <div key={message.id} className="flex flex-col gap-2">
+                            <div
+                                className={cn(
+                                    'flex items-end gap-2',
+                                    message.role === 'user' ? 'justify-end' : 'justify-start'
+                                )}
+                            >
+                                {message.role === 'assistant' && (
+                                    <Avatar className="h-7 w-7 shrink-0">
+                                        {hasAvatar ? (
+                                            <AvatarImage src="/avatar.png" alt="Dave Njeru" />
+                                        ) : null}
+                                        <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                                            DN
+                                        </AvatarFallback>
+                                    </Avatar>
+                                )}
+
+                                <div className={cn(
+                                    'max-w-[75%] rounded-2xl px-4 py-2.5 text-sm',
+                                    message.role === 'user'
+                                        ? 'bg-primary text-primary-foreground rounded-br-sm'
+                                        : 'bg-muted text-foreground rounded-bl-sm'
+                                )}>
+                                    <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                                    <p className={cn(
+                                        'text-[10px] mt-1',
+                                        message.role === 'user' ? 'text-primary-foreground/60' : 'text-muted-foreground'
+                                    )}>
+                                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    </p>
+                                </div>
+
+                                {message.role === 'user' && (
+                                    <Avatar className="h-7 w-7 shrink-0">
+                                        <AvatarFallback className="bg-secondary text-secondary-foreground text-xs">
+                                            You
+                                        </AvatarFallback>
+                                    </Avatar>
+                                )}
+                            </div>
+
+                            {/* Rich components — aligned with bubble, below text */}
+                            {message.role === 'assistant' && message.components && message.components.length > 0 && (
+                                <div className="pl-9 flex flex-col gap-3">
+                                    {message.components.map(type => (
+                                        <RichComponent key={type} type={type} />
+                                    ))}
                                 </div>
                             )}
-                        </div>
-                        <div className="bg-white border border-gray-200 rounded-lg p-3">
-                            <div className="flex space-x-2">
-                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
-                                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
                             </div>
-                        </div>
-                    </div>
-                )}
+                        ))}
 
-                <div ref={messagesEndRef} />
-            </div>
+                        {isLoading && (
+                            <div className="flex items-end gap-2 justify-start">
+                                <Avatar className="h-7 w-7 shrink-0">
+                                    {hasAvatar ? (
+                                        <AvatarImage src="/avatar.png" alt="Dave Njeru" />
+                                    ) : null}
+                                    <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                                        DN
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div className="bg-muted rounded-2xl rounded-bl-sm px-4 py-3">
+                                    <div className="flex gap-1 items-center h-4">
+                                        <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" />
+                                        <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce delay-100" />
+                                        <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce delay-200" />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        <div ref={messagesEndRef} />
+                    </div>
+                </ScrollArea>
+            </CardContent>
 
             {/* Input */}
-            <div className="border-t border-gray-200 p-4 bg-white rounded-b-lg">
-                <div className="flex gap-2">
-                    <input
+            <CardFooter className="px-5 py-4 border-t border-border shrink-0">
+                <div className="flex w-full gap-2">
+                    <Input
                         ref={inputRef}
-                        type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleKeyPress}
+                        onKeyDown={handleKeyDown}
                         placeholder="Type your message..."
-                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent text-gray-800"
                         disabled={isLoading}
                         autoFocus
+                        className="flex-1 bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-ring"
                     />
-                    <button
+                    <Button
                         onClick={sendMessage}
                         disabled={!input.trim() || isLoading}
-                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        size="icon"
+                        className="shrink-0"
                     >
-                        <Send className="w-5 h-5" />
-                    </button>
+                        <Send className="h-4 w-4" />
+                    </Button>
                 </div>
-            </div>
-        </div>
+            </CardFooter>
+        </Card>
     );
 }

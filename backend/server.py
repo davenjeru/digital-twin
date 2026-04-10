@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from typing import Optional, List, Dict
 import json
+import re
 import uuid
 from datetime import datetime
 import boto3
@@ -54,6 +55,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     session_id: str
+    components: list[str] = []
 
 
 class Message(BaseModel):
@@ -101,6 +103,18 @@ def save_conversation(session_id: str, messages: List[Dict]):
         file_path = os.path.join(MEMORY_DIR, get_memory_path(session_id))
         with open(file_path, "w") as f:
             json.dump(messages, f, indent=2)
+
+
+_COMPONENT_TAG_RE = re.compile(r'\[SHOW:([a-z_]+)\]', re.IGNORECASE)
+
+
+def extract_components(text: str) -> tuple[str, list[str]]:
+    """Strip [SHOW:x] tags from text and return (clean_text, [component_names])."""
+    tags = _COMPONENT_TAG_RE.findall(text)
+    clean_text = _COMPONENT_TAG_RE.sub('', text).strip()
+    seen: set[str] = set()
+    unique_tags = [t.lower() for t in tags if not (t.lower() in seen or seen.add(t.lower()))]
+    return clean_text, unique_tags
 
 
 def call_bedrock(conversation: List[Dict], user_message: str) -> str:
@@ -187,7 +201,10 @@ async def chat(request: ChatRequest):
         conversation = load_conversation(session_id)
 
         # Call Bedrock for response
-        assistant_response = call_bedrock(conversation, request.message)
+        raw_response = call_bedrock(conversation, request.message)
+
+        # Strip component tags — save clean text to history so tags don't bleed into future context
+        assistant_response, components = extract_components(raw_response)
 
         # Update conversation history
         conversation.append(
@@ -204,7 +221,7 @@ async def chat(request: ChatRequest):
         # Save conversation
         save_conversation(session_id, conversation)
 
-        return ChatResponse(response=assistant_response, session_id=session_id)
+        return ChatResponse(response=assistant_response, session_id=session_id, components=components)
 
     except HTTPException:
         raise
