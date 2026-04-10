@@ -1,0 +1,257 @@
+{
+  "full_name": "Dave Mathews Njeru",
+  "name": "Dave",
+  "current_role": "Full-Stack Engineer",
+  "location": "Nairobi, Nairobi County, Kenya (GMT+3)",
+  "email": "davenmathews@gmail.com",
+  "linkedin": "",
+  "specialties": [
+    "React (TypeScript)",
+    "Test Engineering (Python)",
+    "QA Automation"
+  ],
+  "years_experience": 8,
+  "education": [],
+  "about": "Dave is a highly skilled software engineer with a passion for turning complex problems into elegant, efficient solutions using cutting-edge technology. Specializing in React(Typescript) and Test Engineering(Python) for both frontends and backends, he has over seven years of hands-on experience developing dynamic, user-centric, well-tested web applications that drive business growth and enhance client satisfaction. Dave excels at collaborating with cross-functional engineering teams to deliver high-impact solutions on time and within scope. A fast learner committed to continuous improvement, Dave stays ahead of industry trends to help businesses fully leverage their digital future.",
+  "top_skills": [
+    { "skill": "QA Engineering", "experience": "7 - 9 years" },
+    { "skill": "TypeScript", "experience": "7 - 9 years" },
+    { "skill": "Python", "experience": "4 - 6 years" },
+    { "skill": "React.js", "experience": "4 - 6 years" },
+    { "skill": "AWS (Amazon Web Services)", "experience": "2 - 3 years" }
+  ],
+  "other_skills": [
+    { "skill": "Agile", "experience": "7 - 9 years" },
+    { "skill": "Automation Engineering", "experience": "7 - 9 years" },
+    { "skill": "Git", "experience": "7 - 9 years" },
+    { "skill": "GitHub", "experience": "7 - 9 years" },
+    { "skill": "GitHub Actions", "experience": "7 - 9 years" },
+    { "skill": "JavaScript", "experience": "7 - 9 years" },
+    { "skill": "QA Analysis", "experience": "7 - 9 years" },
+    { "skill": "REST", "experience": "7 - 9 years" }
+  ],
+  "certifications": [
+    {
+      "name": "Andela AI Academy: AI Mastery Program",
+      "issuer": "Andela",
+      "issued": "Nov 2025"
+    },
+    {
+      "name": "GitHub Copilot",
+      "issuer": "GitHub",
+      "issued": "Oct 2025"
+    },
+    {
+      "name": "Certified Cloud Practitioner (Foundational)",
+      "issuer": "Amazon Web Services (AWS)",
+      "issued": "Jan 2022"
+    }
+  ],
+  "assessments": [
+    {
+      "code": "RT",
+      "name": "React Assessment",
+      "completed": "14 October 2024",
+      "summary": "This assessment tests the candidate's knowledge of React fundamentals. It comprises a series of engaging challenges designed to evaluate candidates' holistic understanding and practical proficiency in React. As candidates progress through the assessment, they will encounter questions and scenarios that require not only a firm grasp of theoretical knowledge but also the ability to apply this knowledge to real-world situations. A candidate passes this test if all challenges minimum required scores are met.",
+      "challenges": [
+        {
+          "name": "Quiz: React [QL]",
+          "description": "This challenge tests candidate familiarity with React and should be suitable for mid-to-senior candidates. Most questions are derived from the React docs and some inspired by frequent React interview questions."
+        },
+        {
+          "name": "Quiz: React Testing Library [QL]",
+          "description": "This quiz tests candidate knowledge of React Testing Library and associated best practices. Question difficulty ranges from basic to intermediate, so the challenge should be suitable for any experienced engineer. Most of the questions are pulled from the official RTL docs and Kent Dodds' blog."
+        },
+        {
+          "name": "React: Book Search",
+          "description": "This challenge involves searching a parsed data structure and rendering results, common tasks in most web apps. Candidates will use fundamental array and string methods, manipulate objects and handle multiple input forms. Care should be taken to promote scalable design and DRY code."
+        }
+      ]
+    },
+    {
+      "code": "QT",
+      "name": "QA/SDET Assessment",
+      "completed": "8 October 2025",
+      "summary": "This assessment tests the candidate's knowledge of QA/SDET fundamentals. It comprises a series of engaging challenges designed to evaluate candidates' holistic understanding and practical proficiency in QA/SDET. As candidates progress through the assessment, they will encounter questions and scenarios that require not only a firm grasp of theoretical knowledge but also the ability to apply this knowledge to real-world situations. A candidate passes this test if all challenges minimum required scores are met.",
+      "challenges": [
+        {
+          "name": "Quiz: Quality Assurance [M02]",
+          "description": "This is a QA Testing Methodology quiz that ensures candidates are familiar with QA foundations."
+        },
+        {
+          "name": "Quiz: SQL [L02]",
+          "description": "This challenge tests the candidate's knowledge of SQL and associated best practices. The difficulty of the question ranges from basic to intermediate, so the challenge should suit any experienced SQL practitioner."
+        },
+        {
+          "name": "First Non-Repeating Letter",
+          "description": "This is a straightforward challenge that tests a candidate's ability to walk a string and store state in a data structure such as a hash map. Even with the simple difficulty, this challenge should reveal substantial insight into the candidate's coding style as it tends to evoke a wide range of possible solutions."
+        }
+      ]
+    },
+    {
+      "code": "PT",
+      "name": "Python Assessment",
+      "completed": "12 October 2025",
+      "summary": "This assessment tests the candidate's knowledge of Python fundamentals. It comprises a series of engaging challenges designed to evaluate candidates' holistic understanding and practical proficiency in Python. As candidates progress through the assessment, they will encounter questions and scenarios that require not only a firm grasp of theoretical knowledge but also the ability to apply this knowledge to real-world situations. A candidate passes this test if all challenges minimum required scores are met.",
+      "challenges": [
+        {
+          "name": "Quiz: Intermediate Python [QL]",
+          "description": "This challenge tests candidate familiarity with Python and should be suitable for mid-to-senior candidates. Most questions are derived from the Python docs, and some are inspired by frequent Python interview questions."
+        },
+        {
+          "name": "Configuration File Parser",
+          "description": "This challenge tests the candidate's ability to write a clean solution to a configuration-parsing task using a builtin library."
+        },
+        {
+          "name": "PageRanker",
+          "description": "This challenge exercises candidates comfort with reading documentation and using a few important Python libraries and modules they may not be familiar with: os, BeautifulSoup and Networkx."
+        }
+      ]
+    },
+    {
+      "code": "GE",
+      "name": "GenAI Engineering Assessment",
+      "completed": "30 October 2025",
+      "summary": "This assessment tests the candidate's knowledge of GenAI Engineering fundamentals. It comprises a series of engaging challenges designed to evaluate candidates' holistic understanding and practical proficiency in GenAI Engineering. As candidates progress through the assessment, they will encounter questions and scenarios that require not only a firm grasp of theoretical knowledge but also the ability to apply this knowledge to real-world situations. A candidate is approved in this test if all challenges minimum required scores are met.",
+      "challenges": [
+        {
+          "name": "Quiz: Generative AI Fundamentals (v2)",
+          "description": "This challenge assesses candidates' knowledge and skills in core GenAI concepts. It consists of questions about LLM fundamentals, embeddings, prompt engineering, transformers, fine-tuning, model evaluation, and an understanding of open-source GenAI tools."
+        },
+        {
+          "name": "Quiz: Core Programming and Problem Solving (v2)",
+          "description": "This challenge evaluates the candidate's problem-solving acumen and adherence to software engineering best practices in the context of AI application development. It includes situational questions about building real-world applications, solution design, and troubleshooting AI solutions."
+        },
+        {
+          "name": "Flatten a Nested Map",
+          "description": "This is a great challenge for testing a candidate's ability to work with recursion and manipulate objects and strings."
+        }
+      ]
+    }
+  ],
+  "work_experience": [
+    {
+      "title": "Software Engineer",
+      "company": "Measurabl Inc.",
+      "industry": "Environmental Industry",
+      "engagement_type": "Andela Job",
+      "start_date": "Feb 2022",
+      "end_date": "Aug 2025",
+      "responsibilities": [
+        "Collaborated with the design team to build a comprehensive design system from scratch, standardizing UI and UX across all products. This initiative reduced the time between concept and prototyping, enabling faster user feedback and accelerating development cycles.",
+        "Engineered infrastructure to host the design system's Storybook documentation on AWS and automated releases using semantic release, introducing a new commit message formatting standard. This standardization was adopted by other engineering teams, improving code consistency and collaboration across the organization.",
+        "Engineered AWS(Terraform) infrastructure for Measurabl's product entry points, integrating with Auth0 for identity management. This ensured consistent authentication and enhanced security across all offerings.",
+        "Managed testcases using Selenium(Python) and Pytest for the web application's upgrade to modern Angular, ensuring feature parity, consistency, and high quality of the upgraded app."
+      ],
+      "skills_used": [
+        "Automation Engineering",
+        "Git",
+        "GitHub",
+        "GitHub Actions",
+        "QA Engineering",
+        "TypeScript",
+        "Python",
+        "React.js",
+        "AWS (Amazon Web Services)"
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Safaricom - DigiFarm",
+      "industry": "Telecom Industry",
+      "engagement_type": "Andela Job",
+      "start_date": "May 2021",
+      "end_date": "Nov 2021",
+      "responsibilities": [
+        "Refactored React components to prevent unnecessary re-renders while making them reusable, enhancing developer efficiency and enabling rapid prototyping for quicker user feedback.",
+        "Implemented automated testing and established a CI/CD pipeline using GitHub Actions, providing immediate feedback on pull requests to prevent regressions, which streamlined the development process.",
+        "Resolved user-facing production bugs and provided technical support, reducing downtime and enhancing the overall user experience."
+      ],
+      "skills_used": [
+        "Git",
+        "GitHub",
+        "GitHub Actions",
+        "Selenium",
+        "TypeScript",
+        "React.js",
+        "Enzyme"
+      ]
+    },
+    {
+      "title": "QA Automation Engineer",
+      "company": "Attune Insurance Services, LLC",
+      "industry": "Insurance Industry",
+      "engagement_type": "Andela Job",
+      "start_date": "Apr 2019",
+      "end_date": "Feb 2021",
+      "responsibilities": [
+        "Worked alongside a Senior QA engineer to design and write end-to-end tests for the main Angular web app using Selenium/Java and JUnit 4 as the test framework.",
+        "Wrote API tests using Node.js (TypeScript) and Jest. Dockerized these tests so that they can run on GitLab. Investigated problems caught as a result of the testing and documented them as bugs.",
+        "Added new tests for the web UI using Cypress framework in TypeScript. Occasionally performed manual tests to verify features before merging."
+      ],
+      "accomplishments": [
+        "Refined an existing Selenium testing framework to be able to run on GitLab using Docker (previously needed to be run locally on someone's machine).",
+        "Reduced browser testing times by 60% (potentially 80% if CPUs and RAM are not an issue) by launching tests in multiple threads using JUnit 4's experimental parallel runners.",
+        "Used GitLab's scheduling feature to allow only a subset of tests to be run on demand, saving time previously wasted on running the whole test suite when only a small part of it was needed."
+      ],
+      "skills_used": [
+        "Automation Engineering",
+        "QA Analysis",
+        "Selenium",
+        "Cypress",
+        "Python",
+        "Java"
+      ]
+    },
+    {
+      "title": "Associate Software Engineer",
+      "company": "Andela Internal Engagements",
+      "engagement_type": "Internal",
+      "start_date": "Oct 2018",
+      "end_date": "Apr 2019",
+      "responsibilities": [
+        "Worked as a Full Stack JavaScript developer in a distributed team with members in Uganda and Nigeria implementing features in the frontend using React, Redux Saga, and the backend using Node.js and Sequelize on a travel management tool.",
+        "Worked on an ETL tool that brought records from Excel spreadsheets and BambooHR to a PostgreSQL database using Node.JS APIs such as read and write streams and child processes to capture and output logs of successful and failed data."
+      ],
+      "accomplishments": [
+        "Previously, all the travel operations were handled using Google Docs and Excel Sheets which was error-prone and not user-friendly. Provided a simple and intuitive UI to handle all travel operations.",
+        "Migrated all travel data from Google Sheets to the backend with the ETL tool."
+      ]
+    },
+    {
+      "title": "Associate Software Engineer",
+      "company": "Andela Internal Engagements",
+      "engagement_type": "Internal",
+      "start_date": "Jul 2018",
+      "end_date": "Oct 2018",
+      "responsibilities": [
+        "Implemented a blogging application with a Python, Flask, PostgreSQL REST backend, and a React-Redux frontend using test-driven development principles with Continuous Integration using TravisCI and Continuous Deployment using Heroku.",
+        "Did the translation of mock-ups into React/Redux components as well as implementing the backend APIs to go with the frontend."
+      ],
+      "accomplishments": [
+        "Implemented a user-friendly UI to write, edit and delete blogs.",
+        "Was able to understand the fundamentals of web application development."
+      ]
+    }
+  ],
+  "technical_projects": [
+    {
+      "name": "Open Source Economy Landing Page",
+      "date": "Sep 2025",
+      "description": "A simple landing page with two forms. The first form allows visitors to send us a message with their email and other details. The second form is for subscribing to newsletters. The details are then saved to a PostgreSQL database via a GraphQL backend.",
+      "github": "https://github.com/davenjeru/ose-f"
+    },
+    {
+      "name": "React/NextJS Practice",
+      "date": "Jan 2022",
+      "description": "A simple practice project for React with NextJS. Key learnings include: ReactJS and Backend API integration, Server-side rendering and Static Site Generation with NextJS, Using nested paths."
+    }
+  ],
+  "languages": [
+    { "language": "English", "proficiency": "Advanced" }
+  ],
+  "professional_profiles": {
+    "github": "https://github.com/davenjeru",
+    "andela": "https://client.andela.com/talent/profile/e1997c6d-bc7a-463d-9834-4fda0a294ec0"
+  }
+}

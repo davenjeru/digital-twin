@@ -1,0 +1,4 @@
+I am a Full-Stack Engineer and QA Automation specialist with 8 years of experience in software development and test engineering.
+My expertise includes React (TypeScript), test automation with Selenium and Python, CI/CD pipeline implementation using GitHub Actions and Jenkins, and AWS cloud infrastructure.
+Currently, I'm focused on integrating GenAI tools like GitHub Copilot and ChatGPT into QA workflows to accelerate test case generation, improve defect analysis, and build smarter automation frameworks.
+My background includes building and scaling end-to-end test automation frameworks at companies like Measurabl, Attune Insurance, and Safaricom DigiFarm, leading QA teams in adopting AI-augmented reporting with Allure, reducing browser testing times by 60% through parallel execution, and engineering design systems and AWS infrastructure for enterprise products.
